@@ -35,8 +35,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         seconds: 10,
         color: 'rgba(255, 255, 255, 0.8)',
         height: null,
-        width: null,
-        elementID: null
+        width: null
+//			,        elementID: null
     };
 
     // Internal constants
@@ -70,7 +70,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 				this.is_reversed = typeof settings.is_reversed != 'undefined' ? settings.is_reversed : false;
         this.jquery_object.html('<canvas class="' + TIMER_CSS_CLASS + '" width="' + settings.width + '" height="' + settings.height + '"></canvas>');
         this.canvas = this.jquery_object.children('.' + TIMER_CSS_CLASS)[0];
-        this.pieSeconds = this.settings.seconds;
+        // this.pieSeconds = this.settings.seconds;
     };
 
     PieTimer.prototype = {
@@ -99,13 +99,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 							this.elapsed_time = (new Date() - this.initial_time) / 1000;
 							this.current_value = DEFAULT_VALUE * Math.max(0, this.settings.seconds - this.elapsed_time) / this.settings.seconds;
 
-                if(this.settings.elementID){
-                    var seconds = Math.ceil(this.current_value/DEFAULT_VALUE * this.settings.seconds);
-                    if(this.pieSeconds !== seconds){
-                        this.pieSeconds = seconds;
-                        $('#'+this.settings.elementID).html(this.pieSeconds);
-                    }
-                }
+//                if(this.settings.elementID){
+//                    var seconds = Math.ceil(this.current_value/DEFAULT_VALUE * this.settings.seconds);
+//                    if(this.pieSeconds !== seconds){
+//                        this.pieSeconds = seconds;
+//                        $('#'+this.settings.elementID).html(this.pieSeconds);
+//                    }
+//                }
 
                 if (this.current_value <= 0) {
                     clearInterval(this.interval_id);
@@ -115,7 +115,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                     this.canvas.width = this.settings.width;
 
                     if ($.isFunction(this.callback)) {
-                        this.callback.call();
+                        this.callback();
                     }
                     this.is_paused = true;
 
